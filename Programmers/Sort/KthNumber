@@ -1,0 +1,7 @@
+def solution(array, commands):
+    answer = []
+    for _ in commands:
+        i, j, k = commands  # i, j, k = cmd[0], cmd[1], cmd[2] 과 동일
+        sortCmd = sorted(array[i-1 : j])
+        answer.append(sortCmd[k-1])
+    return answer
