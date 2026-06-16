@@ -1,0 +1,49 @@
+# 공통) sorted, sort의 옵션(key, reverse)에 대한 이해 필요
+# 기본적으로 오름차순 정렬
+# key: fuction, 정렬 기준, (기본값: None)
+# reverse: bool, 오름차순/내림차순 결정(기본값: 오름차순, False)
+
+# 방법 1)
+# 커스텀 정렬 방법
+# a+b vs b+a로 비교
+# a+b가 b+a보다 크면 a가 먼저 와야 함
+# 예: "6"+"10" = "610" > "10"+"6" = "106" → "6"이 앞
+from functools import cmp_to_key
+
+def solution(numbers):
+    str_numbers = list(map(str, numbers))
+
+    def compare(a, b):
+        if a + b > b + a: # a가 b보다 먼저
+            return -1
+        elif a + b < b + a: # b가 a보다 먼저
+            return 1
+        return 0 # 같은 경우
+
+    str_numbers.sort(key=cmp_to_key(compare))
+    answer = ''.join(str_numbers)
+
+    # 특수 케이스: 모든 수가 0이면 '0' 반환
+    # 예: [0, 0] → "00" → '0'
+    return '0' if answer[0] == '0' else answer
+    # answer[0] == '0' -> int(answer) == 0
+
+
+# 방법2)
+# 문자열의 크기 비교
+# 문자열의 크기 비교는 아스키코드의 숫자로 변환하여 첫번째 인덱스부터 같으면 그 다음 인덱스를 비교하는 방식이다.
+# 예를 들어 '121', '12'를 비교한다.
+# 121보다 12가 먼저와야 큰 수가 된다.
+# 통상적으로 비교하면 12보다 121이 더 크지만, 12가 크게 되게 비교되려면 자릿수를 늘리면 된다.
+# 주어진 리스트의 원소는 최대 세자리이므로 1자리수가 세자리수보다 크게 하려면 최소 세번 곱해면 크게 할 수 있다.
+# 한 자릿수는 두 자리 이상의 수의 두번째 인덱스보다 크거나 같으면 먼저 와야한다.
+# [1, 12, 121, 2]에서 최댓값은 2/12/121/1 이다.
+# 예시) 121212 > 121121121
+
+def solution(numbers):
+    strNums = list(map(str, numbers))
+    maxNum = sorted(strNums, key=lambda x : x*3, reverse=True)
+    answer = ''.join(maxNum)
+    return '0' if answer[0] == '0' else answer
+
+print(solution([1, 12, 121, 2]))

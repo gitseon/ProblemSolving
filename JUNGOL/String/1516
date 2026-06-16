@@ -1,0 +1,31 @@
+# 문자열 딕셔너리 활용 빈도수 확인
+# dict.items(): key, value 쌍을 튜플로 묶어 객체로 반환, 정렬 및 반복문에 활용 가능
+while True:
+    sentence = input()
+    if sentence == "END":
+        break
+    fre = {}
+    words = sentence.split()
+    for char in words:
+        if char in fre:
+            fre[char] += 1
+        else:
+            fre[char] = 1
+    answer = dict(sorted(fre.items()))
+    for k, v in answer.items():
+        print(f"{k} : {v}")
+
+# collections.Counter 사용
+# 각 원소가 몇 번씩 나오는지 dict 형태로 저장된 Counter객체 반환
+from collections import Counter
+
+while True:
+    sentence = input()
+    if sentence == "END":
+        break
+    
+    words = sentence.split()
+    word_count = Counter(words)  # 한 줄로 단어 개수 세기
+    
+    for word, count in sorted(word_count.items()):
+        print(f"{word} : {count}")
