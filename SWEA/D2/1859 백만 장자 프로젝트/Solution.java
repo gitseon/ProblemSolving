@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 /*
 SWEA D2_1859. 백만 장자 프로젝트
+- 분류: 그리디 알고리즘
 - 시간: 450ms (JAVA 10개 테스트케이스 기준 시간 제한: 30초)
 - 시간복잡도: O(N)
 - 푸는 데 걸린 시간: 120분(정답 확인)
@@ -36,7 +37,7 @@ public class Solution {
 		StringBuilder sb;
 
 		int N; // 매매가 나열 수
-		long[] prices; // 매매가 저장 배열
+		int[] prices; // 매매가 저장 배열
 		long profit; // 이익
 		long max; // 최대 판매가
 
@@ -46,13 +47,13 @@ public class Solution {
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
 
-			prices = new long[N];
+			prices = new int[N];
 			profit = 0;
 			max = 0;
 
 			st = new StringTokenizer(br.readLine());
 			for (int i = 0; i < N; i++) {
-				prices[i] = Long.parseLong(st.nextToken());
+				prices[i] = Integer.parseInt(st.nextToken());
 			}
 
 			// 개선: i = N-1은 무조건 바뀌므로 미리 저장해서 다음 N-2부터 도는게 계산을 1회 줄일 수 있다.
