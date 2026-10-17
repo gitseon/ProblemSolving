@@ -1,7 +1,9 @@
+package SWEA.D5.최적경로;
+
 import java.util.*;
 import java.io.*;
 
-public class Solution {
+public class 최적경로 {
 
     static int[] company;
     static int[] house;
